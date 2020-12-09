@@ -1,53 +1,63 @@
 <template>
   <div class="vdatetime-popup">
-    <div class="vdatetime-popup__header">
-      <div class="vdatetime-popup__title" v-if="title">{{ title }}</div>
-      <div class="vdatetime-popup__year" @click="showYear" v-if="type !== 'time'">{{ year }}</div>
-      <div class="vdatetime-popup__date" @click="showMonth" v-if="type !== 'time'">{{ dateFormatted }}</div>
-    </div>
-    <div class="vdatetime-popup__body">
-      <datetime-year-picker
-          v-if="step === 'year'"
-          @change="onChangeYear"
-          :min-date="minDatetime"
-          :max-date="maxDatetime"
-          :year="year"></datetime-year-picker>
-      <datetime-month-picker
-          v-if="step === 'month'"
-          @change="onChangeMonth"
-          :min-date="minDatetime"
-          :max-date="maxDatetime"
-          :year="year"
-          :month="month"></datetime-month-picker>
-      <datetime-calendar
-          v-if="step === 'date'"
-          @change="onChangeDate"
-          :year="year"
-          :month="month"
-          :day="day"
-          :min-date="minDatetime"
-          :max-date="maxDatetime"
-          :week-start="weekStart"
-      ></datetime-calendar>
-      <datetime-time-picker
-          v-if="step === 'time'"
-          @change="onChangeTime"
-          :hour="hour"
-          :minute="minute"
-          :use12-hour="use12Hour"
-          :hour-step="hourStep"
-          :minute-step="minuteStep"
-          :min-time="minTime"
-          :max-time="maxTime"></datetime-time-picker>
-    </div>
-    <div class="vdatetime-popup__actions">
-      <div class="vdatetime-popup__actions__button vdatetime-popup__actions__button--cancel" @click="cancel">
-        <slot name="button-cancel__internal" v-bind:step="step">{{ phrases.cancel }}</slot>
+    <div class="vdatetime-popup-main">
+      <div class="vdatetime-popup__header">
+        <div class="vdatetime-popup__title" v-if="title">{{ title }}</div>
+        <div class="vdatetime-popup__year" @click="showYear" v-if="type !== 'time'">{{ year }}</div>
+        <div class="vdatetime-popup__date" @click="showMonth" v-if="type !== 'time'">{{ dateFormatted }}</div>
       </div>
-      <div class="vdatetime-popup__actions__button vdatetime-popup__actions__button--confirm" @click="confirm">
-        <slot name="button-confirm__internal" v-bind:step="step">{{ phrases.ok }}</slot>
+      <div class="vdatetime-popup__body">
+        <datetime-year-picker
+            v-if="step === 'year'"
+            @change="onChangeYear"
+            :min-date="minDatetime"
+            :max-date="maxDatetime"
+            :year="year"></datetime-year-picker>
+        <datetime-month-picker
+            v-if="step === 'month'"
+            @change="onChangeMonth"
+            :min-date="minDatetime"
+            :max-date="maxDatetime"
+            :year="year"
+            :month="month"></datetime-month-picker>
+        <datetime-calendar
+            v-if="step === 'date'"
+            @change="onChangeDate"
+            :year="year"
+            :month="month"
+            :day="day"
+            :min-date="minDatetime"
+            :max-date="maxDatetime"
+            :week-start="weekStart"
+        ></datetime-calendar>
+        <datetime-time-picker
+            v-if="step === 'time'"
+            @change="onChangeTime"
+            :hour="hour"
+            :minute="minute"
+            :use12-hour="use12Hour"
+            :hour-step="hourStep"
+            :minute-step="minuteStep"
+            :min-time="minTime"
+            :max-time="maxTime"></datetime-time-picker>
+      </div>
+
+      <slot name="bottom-slot__internal"></slot>
+
+      <div class="vdatetime-popup__actions">
+        <div class="vdatetime-popup__actions__button">
+          <slot name="additional-buttons-slot__internal"></slot>
+        </div>
+        <div class="vdatetime-popup__actions__button vdatetime-popup__actions__button--cancel" @click="cancel">
+          <slot name="button-cancel__internal" v-bind:step="step">{{ phrases.cancel }}</slot>
+        </div>
+        <div class="vdatetime-popup__actions__button vdatetime-popup__actions__button--confirm" @click="confirm">
+          <slot name="button-confirm__internal" v-bind:step="step">{{ phrases.ok }}</slot>
+        </div>
       </div>
     </div>
+
+    <slot name="right-slot__internal"></slot>
   </div>
 </template>
 
@@ -212,6 +222,7 @@ export default {
     onChangeYear (year) {
       this.newDatetime = this.newDatetime.set({ year })
 
+      this.emitDate()
       if (this.auto) {
         this.nextStep()
       }
@@ -219,12 +230,14 @@ export default {
     onChangeMonth (month) {
       this.newDatetime = this.newDatetime.set({ month })
 
+      this.emitDate()
       if (this.auto) {
         this.nextStep()
       }
     },
     onChangeDate (year, month, day) {
       this.newDatetime = this.newDatetime.set({ year, month, day })
+      this.emitDate()
 
       if (this.auto) {
         this.nextStep()
@@ -265,80 +278,11 @@ export default {
           this.nextStep()
           break
       }
+    },
+    emitDate () {
+      this.$emit('input', this.newDatetime)
     }
   }
 }
 </script>
 
-<style>
-.vdatetime-popup {
-  box-sizing: border-box;
-  z-index: 1000;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 340px;
-  max-width: calc(100% - 30px);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-  color: #444;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  line-height: 1.18;
-  background: #fff;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
-  & * {
-    box-sizing: border-box;
-  }
-}
-
-.vdatetime-popup__header {
-  padding: 18px 30px;
-  background: #3f51b5;
-  color: #fff;
-  font-size: 32px;
-}
-
-.vdatetime-popup__title {
-  margin-bottom: 8px;
-  font-size: 21px;
-  font-weight: 300;
-}
-
-.vdatetime-popup__year {
-  font-weight: 300;
-  font-size: 14px;
-  opacity: 0.7;
-  cursor: pointer;
-  transition: opacity .3s;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.vdatetime-popup__date {
-  line-height: 1;
-  cursor: pointer;
-}
-
-.vdatetime-popup__actions {
-  padding: 0 20px 10px 30px;
-  text-align: right;
-}
-
-.vdatetime-popup__actions__button {
-  display: inline-block;
-  border: none;
-  padding: 10px 20px;
-  background: transparent;
-  font-size: 16px;
-  color: #3f51b5;
-  cursor: pointer;
-  transition: color .3s;
-
-  &:hover {
-    color: #444;
-  }
-}
-</style>

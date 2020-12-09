@@ -31,6 +31,7 @@ function rollupBundle ({ env }) {
       }),
       cjs(),
       vue({
+        // css: false
         compileTemplate: true,
         css (styles, stylesNodes) {
           // Only generate the styles once

@@ -28,6 +28,7 @@
           :max-datetime="popupMaxDatetime"
           @confirm="confirm"
           @cancel="cancel"
+          @input="datePicked"
           :auto="auto"
           :week-start="weekStart"
           :flow="flow"
@@ -37,6 +38,15 @@
         </template>
         <template slot="button-confirm__internal" slot-scope="scope">
           <slot name="button-confirm" v-bind:step="scope.step">{{ phrases.ok }}</slot>
+        </template>
+        <template slot="bottom-slot__internal">
+          <slot name="bottom-slot"></slot>
+        </template>
+        <template slot="right-slot__internal">
+          <slot name="right-slot"></slot>
+        </template>
+        <template slot="additional-buttons-slot__internal">
+          <slot name="additional-buttons-slot"></slot>
         </template>
       </datetime-popup>
     </transition-group>
@@ -225,6 +235,9 @@ export default {
     cancel () {
       this.close()
     },
+    datePicked (dateTimeObject) {
+      this.$emit('date-picked', dateTimeObject)
+    },
     clickOutside () {
       if (this.backdropClick === true) { this.cancel() }
     },
@@ -259,25 +272,3 @@ export default {
 }
 </script>
 
-<style>
-.vdatetime-fade-enter-active,
-.vdatetime-fade-leave-active {
-  transition: opacity .4s;
-}
-
-.vdatetime-fade-enter,
-.vdatetime-fade-leave-to {
-  opacity: 0;
-}
-
-.vdatetime-overlay {
-  z-index: 999;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-  transition: opacity .5s;
-}
-</style>
