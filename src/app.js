@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { DateTime as LuxonDateTime } from 'luxon'
-import Datetime from '../../dist/vue-datetime'
+import Datetime from '../../dist/lp-vue-datetime'
 // import '../../dist/vue-datetime.css'
 import './app.css'
 

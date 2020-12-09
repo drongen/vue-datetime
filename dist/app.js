@@ -8403,7 +8403,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*!
- * vue-datetime v1.0.0-beta.13
+ * lp-vue-datetime v1.0.0-beta.13
  * (c) 2020 Mario Juárez
  * Released under the MIT License.
  */
@@ -8412,7 +8412,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports, __webpack_require__(0)) :  true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : factory(global.VueDatetime = global.VueDatetime || {}, global.luxon);
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : factory(global.LpVueDatetime = global.LpVueDatetime || {}, global.luxon);
 })(undefined, function (exports, luxon) {
   'use strict';
 
@@ -9091,7 +9091,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         default: null
       }
     },
-
     computed: {
       years: function years$1() {
         var this$1 = this;
@@ -9105,16 +9104,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         });
       }
     },
-
     methods: {
       select: function select(year) {
         if (year.disabled) {
           return;
         }
-
         this.$emit('change', parseInt(year.number));
       },
-
       scrollToCurrent: function scrollToCurrent() {
         if (this.$refs.yearList) {
           var selectedYear = this.$refs.yearList.querySelector('.vdatetime-year-picker__item--selected');
@@ -9122,11 +9118,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         }
       }
     },
-
     mounted: function mounted() {
       this.scrollToCurrent();
     },
-
     updated: function updated() {
       this.scrollToCurrent();
     }
@@ -22086,15 +22080,15 @@ var _vue2 = _interopRequireDefault(_vue);
 
 var _luxon = __webpack_require__(0);
 
-var _vueDatetime = __webpack_require__(2);
+var _lpVueDatetime = __webpack_require__(2);
 
-var _vueDatetime2 = _interopRequireDefault(_vueDatetime);
+var _lpVueDatetime2 = _interopRequireDefault(_lpVueDatetime);
 
 __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_vue2.default.use(_vueDatetime2.default);
+_vue2.default.use(_lpVueDatetime2.default);
 // import '../../dist/vue-datetime.css'
 
 
