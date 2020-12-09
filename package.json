@@ -1,5 +1,5 @@
 {
-  "name": "rt-vue-datetime",
+  "name": "lp-vue-datetime",
   "version": "1.0.0-beta.13",
   "description": "Mobile friendly datetime picker for Vue. Supports date, datetime and time modes, i18n and disabling dates.",
   "keywords": [
