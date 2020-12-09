@@ -138,12 +138,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mariomka/vue-datetime.git"
+    "url": "git+https://github.com/drongen/vue-datetime.git"
   },
   "bugs": {
-    "url": "https://github.com/mariomka/vue-datetime/issues"
+    "url": "https://github.com/drongen/vue-datetime/issues"
   },
-  "homepage": "https://github.com/mariomka/vue-datetime#readme",
+  "homepage": "https://github.com/drongen/vue-datetime#readme",
   "license": {
     "type": "MIT",
     "url": "http://www.opensource.org/licenses/mit-license.php"
