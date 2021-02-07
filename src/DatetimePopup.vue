@@ -51,7 +51,7 @@
         <div class="vdatetime-popup__actions__button vdatetime-popup__actions__button--cancel" @click="cancel">
           <slot name="button-cancel__internal" v-bind:step="step">{{ phrases.cancel }}</slot>
         </div>
-        <div class="vdatetime-popup__actions__button vdatetime-popup__actions__button--confirm" @click="confirm">
+        <div class="vdatetime-popup__actions__button vdatetime-popup__actions__button--confirm" v-if="showConfirmationButton" @click="confirm">
           <slot name="button-confirm__internal" v-bind:step="step">{{ phrases.ok }}</slot>
         </div>
       </div>
@@ -132,6 +132,10 @@ export default {
     },
     title: {
       type: String
+    },
+    showConfirmationButton: {
+      type: Boolean,
+      default: false
     }
   },
 

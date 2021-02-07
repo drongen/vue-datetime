@@ -26,6 +26,7 @@
           :minute-step="minuteStep"
           :min-datetime="popupMinDatetime"
           :max-datetime="popupMaxDatetime"
+          :show-confirmation-button="showConfirmationButton"
           @confirm="confirm"
           @cancel="cancel"
           @input="datePicked"
@@ -152,6 +153,10 @@ export default {
     backdropClick: {
       type: Boolean,
       default: true
+    },
+    showConfirmationButton: {
+      type: Boolean,
+      default: false
     }
   },
 
