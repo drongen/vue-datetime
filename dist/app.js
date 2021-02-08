@@ -8403,8 +8403,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*!
- * lp-vue-datetime v1.0.0-beta.13
- * (c) 2020 Mario Juárez
+ * lp-vue-datetime v1.0.0-beta.14
+ * (c) 2021 Mario Juárez
  * Released under the MIT License.
  */
 
@@ -9469,6 +9469,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       },
       title: {
         type: String
+      },
+      showConfirmationButton: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -9664,10 +9668,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }) : _vm._e()], 1), _vm._v(" "), _vm._t("bottom-slot__internal"), _vm._v(" "), _c("div", { staticClass: "vdatetime-popup__actions" }, [_c("div", { staticClass: "vdatetime-popup__actions__button" }, [_vm._t("additional-buttons-slot__internal")], 2), _vm._v(" "), _c("div", {
       staticClass: "vdatetime-popup__actions__button vdatetime-popup__actions__button--cancel",
       on: { click: _vm.cancel }
-    }, [_vm._t("button-cancel__internal", [_vm._v(_vm._s(_vm.phrases.cancel))], { step: _vm.step })], 2), _vm._v(" "), _c("div", {
+    }, [_vm._t("button-cancel__internal", [_vm._v(_vm._s(_vm.phrases.cancel))], { step: _vm.step })], 2), _vm._v(" "), _vm.showConfirmationButton ? _c("div", {
       staticClass: "vdatetime-popup__actions__button vdatetime-popup__actions__button--confirm",
       on: { click: _vm.confirm }
-    }, [_vm._t("button-confirm__internal", [_vm._v(_vm._s(_vm.phrases.ok))], { step: _vm.step })], 2)])], 2), _vm._v(" "), _vm._t("right-slot__internal")], 2);
+    }, [_vm._t("button-confirm__internal", [_vm._v(_vm._s(_vm.phrases.ok))], { step: _vm.step })], 2) : _vm._e()])], 2), _vm._v(" "), _vm._t("right-slot__internal")], 2);
   };
   var __vue_staticRenderFns__$1 = [];
   __vue_render__$1._withStripped = true;
@@ -9689,6 +9693,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   var __vue_component__$1 = /*#__PURE__*/normalizeComponent$1({ render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 }, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined);
 
+  //
   //
   //
   //
@@ -9839,6 +9844,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       backdropClick: {
         type: Boolean,
         default: true
+      },
+      showConfirmationButton: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -10001,6 +10010,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         "minute-step": _vm.minuteStep,
         "min-datetime": _vm.popupMinDatetime,
         "max-datetime": _vm.popupMaxDatetime,
+        "show-confirmation-button": _vm.showConfirmationButton,
         auto: _vm.auto,
         "week-start": _vm.weekStart,
         flow: _vm.flow,
@@ -10054,7 +10064,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     window.Vue.use(plugin);
   }
 
-  var version = '1.0.0-beta.13';
+  var version = '1.0.0-beta.14';
 
   exports['default'] = plugin;
   exports.Datetime = __vue_component__;
